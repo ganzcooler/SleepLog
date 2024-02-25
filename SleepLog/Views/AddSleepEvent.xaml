@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SleepLog.Views.AddSleepEvent"
+             Title="AddSleepEvent">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Text="Eintrag hinzufügen" />
+
+        <!-- Datepicker VON -->
+        <DatePicker
+            Grid.Row="1"
+            Grid.Column="0"
+            x:Name="VonDatePicker"/>
+        <TimePicker
+            Grid.Row="1"
+            Grid.Column="1"
+            x:Name="VonTimePicker" />
+
+        <!-- Datepicker BIS -->
+        <DatePicker 
+            Grid.Row="2"
+            Grid.Column="0"
+            x:Name="BisDatePicker"/>
+        <TimePicker
+            Grid.Row="2"
+            Grid.Column="1"
+            x:Name="BisTimePicker" />
+
+        <!-- Dropdown EventType -->
+        <Picker
+            Grid.Row="3"
+            x:Name="EventTypePicker">
+            <Picker.Items>
+                <x:String>Schlafen</x:String>
+                <x:String>Wach</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <!-- Senden button -->
+        <Button
+            Grid.Row="4"
+            Grid.Column="0"
+            x:Name="AddEventButton"
+            Text="OK" 
+            Clicked="AddEventButton_Clicked"/>
+
+        <!-- Cancel button -->
+        <Button
+            Grid.Row="4"
+            Grid.Column="1"
+            x:Name="CancelButton"
+            Text="Abbrechen"
+            Clicked="CancelButton_ClickedAsync"/>
+    </Grid>
+</ContentPage>

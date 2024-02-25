@@ -1,31 +1,24 @@
 ﻿using EFLib;
+using SleepLog.Views;
 
 namespace SleepLog
 {
     public partial class MainPage : ContentPage
     {
         private readonly IEFDBContext eFDBContext;
+        private readonly AddSleepEvent addSleepEvent;
 
-        public MainPage(IEFDBContext eFDBContext)
+        public MainPage(IEFDBContext eFDBContext, AddSleepEvent addSleepEvent)
         {
             this.eFDBContext = eFDBContext;
+            this.addSleepEvent = addSleepEvent;
             InitializeComponent();
             lvSampleData.ItemsSource = eFDBContext.LogEntries;
         }
 
-        private void generateSampleData(object sender, EventArgs e)
+        private void AddEntryButton_Clicked(object sender, EventArgs e)
         {
-            LogEntry logEntry = new LogEntry
-            {
-                Von = new DateTime(2024, 02, 21, 12, 00, 00),
-                Bis = new DateTime(2024, 02, 21, 14, 00, 00),
-                EventType = EventType.SLEEP
-            };
-
-            eFDBContext.LogEntries.Add(logEntry);
-            eFDBContext.SaveChanges();
-
-            lvSampleData.ItemsSource = eFDBContext.LogEntries;
+            Navigation.PushModalAsync(addSleepEvent);
         }
     }
 }

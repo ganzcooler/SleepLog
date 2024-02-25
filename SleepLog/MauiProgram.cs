@@ -1,6 +1,7 @@
 ﻿using EFLib;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using SleepLog.Views;
 
 namespace SleepLog
 {
@@ -20,6 +21,7 @@ namespace SleepLog
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddDbContext<IEFDBContext, EFDBContext>(
                 options => options.UseSqlite($"Filename=sleeplog.db3", x => x.MigrationsAssembly(nameof(EFLib))));
+            builder.Services.AddSingleton<AddSleepEvent>();
 
 #if DEBUG
             builder.Logging.AddDebug();
