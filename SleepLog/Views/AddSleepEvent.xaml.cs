@@ -4,6 +4,7 @@ namespace SleepLog.Views;
 
 public partial class AddSleepEvent : ContentPage
 {
+    public event Action DBDataSent;
     private readonly IEFDBContext eFDBContext;
 
     public AddSleepEvent(IEFDBContext eFDBContext)
@@ -21,15 +22,11 @@ public partial class AddSleepEvent : ContentPage
     {
         // get VON date and time
         DateTime vonDate;
-        vonDate = VonDatePicker.Date;
-        vonDate.Add(VonTimePicker.Time);
-        vonDate = vonDate.Date.Add(vonDate.TimeOfDay);
+        vonDate = VonDatePicker.Date + VonTimePicker.Time;
 
         // get BIS date and time
         DateTime bisDate;
-        bisDate = BisDatePicker.Date;
-        bisDate.Add(BisTimePicker.Time);
-        bisDate = bisDate.Date.Add(bisDate.TimeOfDay);
+        bisDate = BisDatePicker.Date + BisTimePicker.Time;
 
         // get eventtype
         EventType eventType = (EventType)EventTypePicker.SelectedIndex;
@@ -43,6 +40,7 @@ public partial class AddSleepEvent : ContentPage
         });
         eFDBContext.SaveChanges();
 
+        DBDataSent?.Invoke();
         await Navigation.PopModalAsync();
     }
 }
